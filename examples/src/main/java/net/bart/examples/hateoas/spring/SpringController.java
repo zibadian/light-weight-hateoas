@@ -28,7 +28,7 @@ public class SpringController {
                 .content(content)
                 .addLink("search", "http://www.google.com")
                 .addLink("report", new URL("http://www.politie.nl"))
-                .addLink("test2", context.resource(SpringController.class).completelyWrong());
+                .addLink("test2", context.resource(SpringController.class).test2(context));
     }
 
     @GetMapping(value = "test2", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -37,7 +37,4 @@ public class SpringController {
         return new BootResponse("Hello world");
     }
 
-    public String completelyWrong() {
-        return null;
-    }
 }

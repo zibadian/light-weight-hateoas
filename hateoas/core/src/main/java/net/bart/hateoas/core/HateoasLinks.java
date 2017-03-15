@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HateoasLinks {
+public final class HateoasLinks {
 
     private final Map<String, URI> links = new HashMap<>();
     private volatile AbstractResourceLinkBuilder internalLink;
@@ -24,15 +24,18 @@ public class HateoasLinks {
         }
         final Map<String, String> result = new HashMap<>();
         for (Map.Entry<String, URI> linkEntry : links.entrySet()) {
-            result.put(linkEntry.getKey(), linkEntry.getValue().toString());
+            if (linkEntry.getValue() != null) {
+                result.put(linkEntry.getKey(), linkEntry.getValue().toString());
+            }
         }
         return result;
     }
 
     public final void addLink(final String ref, final Object link) {
         if (internalLink != null) {
-            links.put(ref, internalLink.build());
+            final URI uri = internalLink.build();
             internalLink = null;
+            addLink(ref, uri);
         } else if (link == null) {
             // Do nothing
         } else if (link instanceof URI) {

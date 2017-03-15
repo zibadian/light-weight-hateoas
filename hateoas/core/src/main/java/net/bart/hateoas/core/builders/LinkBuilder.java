@@ -14,8 +14,22 @@ import java.util.stream.Collectors;
 public class LinkBuilder {
 
     private final List<UrlPart> urlParts = new ArrayList<>();
+    private boolean hasErrors = false;
+
+    public final boolean hasErrors() {
+        return hasErrors;
+    }
+
+    protected final void setErrorsDetected(final boolean hasErrors) {
+        if (!this.hasErrors) {
+            this.hasErrors = hasErrors;
+        }
+    }
 
     public URI build() {
+        if (hasErrors) {
+            return null;
+        }
         try {
             return new URI(urlParts
                     .stream()
