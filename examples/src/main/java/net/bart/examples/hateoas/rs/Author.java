@@ -1,5 +1,6 @@
 package net.bart.examples.hateoas.rs;
 
+import net.bart.examples.hateoas.spring.SpringController;
 import net.bart.hateoas.core.HateoasAware;
 import net.bart.hateoas.core.HateoasLinks;
 
@@ -25,7 +26,7 @@ public class Author implements HateoasAware {
 
     public Author addSelfLink() {
         try {
-            addLink("Self", getLinks().resource(BootController.class).test(null));
+            addLink("Self", getLinks().resource(SpringController.class).test(null));
         } catch (MalformedURLException e) {
         }
         return this;

@@ -6,16 +6,12 @@ import net.bart.hateoas.spring.builder.SpringResourceLinkBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 @Configuration
+@Import(InterceptorConfiguration.class)
 public class SpringHateoasConfiguration extends HateoasConfiguration {
-
-    @Bean
-    @Autowired
-    public InterceptorConfiguration createContextConfiguration(final RequestMappingHandlerAdapter requestMappingHandlerAdapter) {
-        return new InterceptorConfiguration(requestMappingHandlerAdapter, this);
-    }
 
     @Override
     protected Class<? extends AbstractResourceLinkBuilder> getResourceLinkBuilderClass() {
