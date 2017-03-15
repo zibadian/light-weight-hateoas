@@ -4,12 +4,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class DirectLinkBuilder extends AbstractLinkBuilder {
+public class DirectLinkBuilder extends LinkBuilder {
 
     private final URI uri;
 
     public DirectLinkBuilder(final String ref, final Object source) {
-        super(ref);
+        super();
         if (source == null) {
             throw new IllegalArgumentException("Hateoas link URI must not be null.");
         }

@@ -1,26 +1,24 @@
 package net.bart.hateoas.core.builders.urls;
 
+import net.bart.hateoas.core.builders.UrlPart;
+
 import java.util.HashSet;
 import java.util.Set;
 
-public final class QueryParamPart extends BaseUrlPart {
+public final class QueryParamPart implements UrlPart {
 
-    private final Set<UrlParameter> parameters = new HashSet<>();
+    private final Set<QueryParameter> parameters = new HashSet<>();
 
-    public QueryParamPart() {
-        super("", false);
-    }
-
-    public Set<UrlParameter> getParameters() {
+    public Set<QueryParameter> getParameters() {
         return parameters;
     }
 
-    public UrlParameter add(final String name, final Object value) {
-        final UrlParameter result;
+    public QueryParameter add(final String name, final Object value) {
+        final QueryParameter result;
         if (value == null) {
-            result = new UrlParameter(name, null);
+            result = new QueryParameter(name, null);
         } else {
-            result = new UrlParameter(name, value.toString());
+            result = new QueryParameter(name, value.toString());
         }
         parameters.add(result);
         return result;
@@ -29,13 +27,23 @@ public final class QueryParamPart extends BaseUrlPart {
     @Override
     public String getHref() {
         StringBuilder builder = new StringBuilder();
-        for(UrlParameter parameter : parameters) {
+        for(QueryParameter parameter : parameters) {
             builder.append(parameter.getFinalResult());
         }
         if (builder.length() > 0) {
             builder.replace(0, 1, "?");
         }
         return builder.toString();
+    }
+
+    @Override
+    public boolean isUnique() {
+        return true;
+    }
+
+    @Override
+    public int getOrder() {
+        return Integer.MAX_VALUE-1;
     }
 
 }

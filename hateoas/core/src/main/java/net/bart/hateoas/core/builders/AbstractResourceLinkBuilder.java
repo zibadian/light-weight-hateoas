@@ -1,24 +1,29 @@
 package net.bart.hateoas.core.builders;
 
-import java.net.URI;
+import net.bart.hateoas.core.providers.HateoasProviderHelper;
+import net.bart.hateoas.core.proxy.Invoker;
 
-public abstract class AbstractResourceLinkBuilder extends AbstractLinkBuilder {
+import java.lang.reflect.Method;
 
-    private URI internalLink;
+public abstract class AbstractResourceLinkBuilder extends LinkBuilder {
 
-    public AbstractResourceLinkBuilder() {
-        super("");
+    public final <T> T getResource(final Class<T> resourceClass) {
+        addPart(makeControllerPathPart(resourceClass));
+        return HateoasProviderHelper.makeResourceWatcher(resourceClass, new InternalLinkBuilder());
     }
 
-    @Override
-    public final URI build() {
-        return internalLink;
-    }
+    protected abstract UrlPart makeMethodPathPart(final Method method);
 
-    protected final void setInternalLink(final URI internalLink) {
-        this.internalLink = internalLink;
-    }
+    protected abstract UrlPart makeControllerPathPart(final Class<?> resourceClass);
 
-    public abstract <T> T getResource(final Class<T> resourceClass);
+    private class InternalLinkBuilder implements Invoker {
+
+        @Override
+        public Object invoke(final Object proxy, final Method method, final Object[] arguments) throws Throwable {
+            addPart(makeMethodPathPart(method));
+            return null;
+        }
+
+    }
 
 }

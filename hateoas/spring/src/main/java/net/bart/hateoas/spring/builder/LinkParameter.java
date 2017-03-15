@@ -1,36 +1,32 @@
-package net.bart.hateoas.core.builders.urls;
+package net.bart.hateoas.spring.builder;
 
-public final class UrlParameter {
+final class LinkParameter {
 
     private final String name;
     private String value;
     private boolean mustInclude = false;
     private boolean hasBeenSet = false;
 
-    public UrlParameter(final String name, final String value) {
+    LinkParameter(final String name, final String value) {
         this.name = name;
-        setValue(value);
+        this.value = value;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public String getValue() {
+    String getValue() {
         return value;
     }
 
-    public UrlParameter setValue(final String value) {
+    LinkParameter setValue(final String value) {
         this.value = value;
         hasBeenSet = value != null;
         return this;
     }
 
-    public boolean isMustInclude() {
-        return mustInclude;
-    }
-
-    public UrlParameter setMustInclude(final boolean mustInclude) {
+    LinkParameter setMustInclude(final boolean mustInclude) {
         this.mustInclude = mustInclude;
         return this;
     }
@@ -43,5 +39,4 @@ public final class UrlParameter {
         }
         return "";
     }
-
 }

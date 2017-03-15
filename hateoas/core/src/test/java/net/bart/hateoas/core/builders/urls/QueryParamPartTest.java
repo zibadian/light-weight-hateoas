@@ -17,7 +17,7 @@ public class QueryParamPartTest {
     @Test
     public void no_parameters() throws Exception {
 
-        assertEquals("", fixture.toString());
+        assertEquals("", fixture.getHref());
         assertTrue(fixture.getParameters().isEmpty());
     }
 
@@ -25,28 +25,28 @@ public class QueryParamPartTest {
     public void non_empty_parameters() throws Exception {
 
         fixture.add("test", 1234);
-        assertEquals("?test=1234", fixture.toString());
+        assertEquals("?test=1234", fixture.getHref());
     }
 
     @Test
     public void empty_parameters() throws Exception {
 
         fixture.add("test", null);
-        assertEquals("", fixture.toString());
+        assertEquals("", fixture.getHref());
     }
 
     @Test
     public void must_include_non_empty() throws Exception {
 
         fixture.add("test", "1234").setMustInclude(true);
-        assertEquals("?test=1234", fixture.toString());
+        assertEquals("?test=1234", fixture.getHref());
     }
 
     @Test
     public void must_include_empty() throws Exception {
 
         fixture.add("test", null).setMustInclude(true);
-        assertEquals("?test=", fixture.toString());
+        assertEquals("?test=", fixture.getHref());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class QueryParamPartTest {
         fixture.add("test4", true);
         fixture.add("test5", null);
 
-        final String result = fixture.toString();
+        final String result = fixture.getHref();
 
         assertTrue(result.contains("test1="));
         assertTrue(result.contains("test2=1234"));

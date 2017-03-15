@@ -2,7 +2,7 @@ package net.bart.hateoas.rs.providers;
 
 import net.bart.hateoas.core.HateoasContext;
 import net.bart.hateoas.core.annotations.Hateoas;
-import net.bart.hateoas.core.builders.AbstractLinkBuilder;
+import net.bart.hateoas.core.builders.LinkBuilder;
 import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
 import net.bart.hateoas.core.builders.DirectLinkBuilder;
 import net.bart.hateoas.core.providers.LinkProvider;
@@ -50,7 +50,7 @@ public class HateoasContextInjectionResolver extends ParamInjectionResolver<Hate
     private static class HateoasContextFactory extends AbstractContainerRequestValueFactory<HateoasContext> implements LinkProvider {
 
         @Override
-        public AbstractLinkBuilder provideSelfLink() {
+        public LinkBuilder provideSelfLink() {
             return new DirectLinkBuilder("self", getContainerRequest().getRequestUri());
         }
 

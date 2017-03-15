@@ -2,7 +2,7 @@ package net.bart.hateoas.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.bart.hateoas.core.builders.AbstractLinkBuilder;
+import net.bart.hateoas.core.builders.LinkBuilder;
 import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
 import net.bart.hateoas.core.providers.HateoasProviderHelper;
 
@@ -37,8 +37,8 @@ public class HateoasLinks {
             // Do nothing
         } else if (link instanceof URI) {
             links.put(ref, (URI) link);
-        } else if (link instanceof AbstractLinkBuilder) {
-            links.put(ref, ((AbstractLinkBuilder) link).build());
+        } else if (link instanceof LinkBuilder) {
+            links.put(ref, ((LinkBuilder) link).build());
         } else {
             try {
                 links.put(ref, new URI(link.toString()));

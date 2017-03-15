@@ -1,6 +1,6 @@
 package net.bart.hateoas.core;
 
-import net.bart.hateoas.core.builders.AbstractLinkBuilder;
+import net.bart.hateoas.core.builders.LinkBuilder;
 import net.bart.hateoas.core.providers.LinkProvider;
 
 public class HateoasContext implements HateoasAware {
@@ -24,8 +24,8 @@ public class HateoasContext implements HateoasAware {
     }
 
     public HateoasContext addSelfLink() {
-        final AbstractLinkBuilder abstractLinkBuilder = self.provideSelfLink();
-        addLink(abstractLinkBuilder.getRef(), abstractLinkBuilder.build());
+        final LinkBuilder abstractLinkBuilder = self.provideSelfLink();
+        addLink("self", abstractLinkBuilder.build());
         return this;
     }
 
