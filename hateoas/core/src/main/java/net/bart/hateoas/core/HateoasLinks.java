@@ -19,14 +19,14 @@ public final class HateoasLinks {
     @JsonProperty
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public final Map<String, String> getLinks() {
-        if (links.isEmpty()) {
-            return null;
-        }
         final Map<String, String> result = new HashMap<>();
         for (Map.Entry<String, URI> linkEntry : links.entrySet()) {
             if (linkEntry.getValue() != null) {
                 result.put(linkEntry.getKey(), linkEntry.getValue().toString());
             }
+        }
+        if (result.isEmpty()) {
+            return null;
         }
         return result;
     }

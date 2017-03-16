@@ -17,6 +17,8 @@ public class HostPartTest {
     @Test
     public void only_host() {
         assertEquals("http://localhost", fixture.getHref());
+        assertEquals("http", fixture.getScheme());
+        assertEquals("localhost", fixture.getHost());
     }
 
     @Test
@@ -35,6 +37,7 @@ public class HostPartTest {
     public void host_and_authorization_info() {
         fixture.setAuthenticationInfo("test:pw");
         assertEquals("http://test:pw@localhost", fixture.getHref());
+        assertEquals("test:pw", fixture.getAuthenticationInfo());
     }
 
     @Test

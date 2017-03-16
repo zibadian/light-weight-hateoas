@@ -9,34 +9,35 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 @Path("/testclass")
-public class BootController {
+public class RSController {
 
     @GET
     @Path("test")
     @Produces(MediaType.APPLICATION_JSON)
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
-    public HateoasContext test(@Hateoas HateoasContext context) throws MalformedURLException {
-        final BootResponse content = new BootResponse("Hello world");
-        final Author test = new Author("Test");
+    public Response test(@Hateoas HateoasContext context) throws MalformedURLException {
+        final RSResponse content = new RSResponse("Hello world");
+        final RSAuthor test = new RSAuthor("Test");
         content.getAuthors().add(test);
         test.addSelfLink();
-        return context
+        return Response.ok(context
                 .content(content)
                 .addLink("search", "http://www.google.com")
                 .addLink("report", new URL("http://www.politie.nl"))
-                .addLink("test2", context.resource(BootController.class).test2(context));
+                .addLink("test2", context.resource(RSController.class).test2(context))).build();
     }
 
     @GET
     @Path("test2")
     @Produces(MediaType.APPLICATION_JSON)
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
-    public BootResponse test2(@Hateoas HateoasContext context) {
-        return new BootResponse("Hello world");
+    public Response test2(@Hateoas HateoasContext context) {
+        return Response.ok().build();
     }
 
 }

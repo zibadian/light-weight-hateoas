@@ -1,17 +1,16 @@
 package net.bart.examples.hateoas.rs;
 
-import net.bart.examples.hateoas.spring.SpringController;
 import net.bart.hateoas.core.HateoasAware;
 import net.bart.hateoas.core.HateoasLinks;
 
 import java.net.MalformedURLException;
 
-public class Author implements HateoasAware {
+public class RSAuthor implements HateoasAware {
 
     private String name;
     private HateoasLinks links = new HateoasLinks();
 
-    public Author(final String name) {
+    public RSAuthor(final String name) {
         this.name = name;
     }
 
@@ -24,9 +23,9 @@ public class Author implements HateoasAware {
         return links;
     }
 
-    public Author addSelfLink() {
+    public RSAuthor addSelfLink() {
         try {
-            addLink("Self", getLinks().resource(SpringController.class).test(null));
+            addLink("Self", getLinks().resource(RSController.class).test(null));
         } catch (MalformedURLException e) {
         }
         return this;

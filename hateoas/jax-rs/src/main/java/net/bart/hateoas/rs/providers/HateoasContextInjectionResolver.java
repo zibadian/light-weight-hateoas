@@ -2,9 +2,9 @@ package net.bart.hateoas.rs.providers;
 
 import net.bart.hateoas.core.HateoasContext;
 import net.bart.hateoas.core.annotations.Hateoas;
-import net.bart.hateoas.core.builders.LinkBuilder;
 import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
-import net.bart.hateoas.core.builders.DirectLinkBuilder;
+import net.bart.hateoas.core.builders.LinkBuilder;
+import net.bart.hateoas.core.builders.urls.UrlPathPart;
 import net.bart.hateoas.core.providers.LinkProvider;
 import net.bart.hateoas.rs.builders.ResourceLinkBuilder;
 import org.glassfish.hk2.api.Factory;
@@ -51,7 +51,7 @@ public class HateoasContextInjectionResolver extends ParamInjectionResolver<Hate
 
         @Override
         public LinkBuilder provideSelfLink() {
-            return new DirectLinkBuilder("self", getContainerRequest().getRequestUri());
+            return new LinkBuilder().addPart(new UrlPathPart(getContainerRequest().getRequestUri().toString()));
         }
 
         @Override
@@ -73,7 +73,8 @@ public class HateoasContextInjectionResolver extends ParamInjectionResolver<Hate
                     .to(ValueFactoryProvider.class)
                     .in(Singleton.class);
             bind(HateoasContextInjectionResolver.class)
-                    .to(new TypeLiteral<InjectionResolver<Hateoas>>() {})
+                    .to(new TypeLiteral<InjectionResolver<Hateoas>>() {
+                    })
                     .in(Singleton.class);
         }
     }

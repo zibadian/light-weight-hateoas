@@ -1,13 +1,13 @@
 package net.bart.hateoas.core.builders.urls;
 
-public final class QueryParameter {
+public final class QueryParameter<T> {
 
     private final String name;
-    private String value;
+    private T value;
     private boolean mustInclude = false;
     private boolean hasBeenSet = false;
 
-    public QueryParameter(final String name, final String value) {
+    public QueryParameter(final String name, final T value) {
         this.name = name;
         setValue(value);
     }
@@ -16,11 +16,11 @@ public final class QueryParameter {
         return name;
     }
 
-    public String getValue() {
+    public T getValue() {
         return value;
     }
 
-    public QueryParameter setValue(final String value) {
+    public QueryParameter<T> setValue(final T value) {
         this.value = value;
         hasBeenSet = value != null;
         return this;
@@ -30,7 +30,7 @@ public final class QueryParameter {
         return mustInclude;
     }
 
-    public QueryParameter setMustInclude(final boolean mustInclude) {
+    public QueryParameter<T> setMustInclude(final boolean mustInclude) {
         this.mustInclude = mustInclude;
         return this;
     }

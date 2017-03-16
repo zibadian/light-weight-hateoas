@@ -11,6 +11,8 @@ import org.junit.Test;
 import java.net.URI;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class LinkBuilderTest {
 
@@ -58,4 +60,19 @@ public class LinkBuilderTest {
         assertEquals("http://testhost", result.toString());
     }
 
+    @Test
+    public void silent_errors() {
+        fixture = new LinkBuilder() {
+            @Override
+            public LinkBuilder addPart(final UrlPart part) {
+                setErrorsDetected(true);
+                return this;
+            }
+        };
+
+        fixture.addPart(null);
+
+        assertNull(fixture.build());
+        assertTrue(fixture.hasErrors());
+    }
 }

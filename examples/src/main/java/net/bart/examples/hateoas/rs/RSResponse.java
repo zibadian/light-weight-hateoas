@@ -3,12 +3,12 @@ package net.bart.examples.hateoas.rs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BootResponse {
+public class RSResponse {
 
     private final String text;
-    private final List<Author> authors = new ArrayList<>();
+    private final List<RSAuthor> authors = new ArrayList<>();
 
-    public BootResponse(final String text) {
+    public RSResponse(final String text) {
         this.text = text;
     }
 
@@ -16,7 +16,8 @@ public class BootResponse {
         return text;
     }
 
-    public List<Author> getAuthors() {
+    public List<RSAuthor> getAuthors() {
         return authors;
     }
+
 }

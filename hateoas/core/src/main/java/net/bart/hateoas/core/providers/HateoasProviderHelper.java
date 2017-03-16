@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class HateoasProviderHelper {
 
     public static final String BASE_URI_KEY = "base_uri";
+
     private static HateoasProviderHelper INSTANCE;
     private final Class<? extends AbstractResourceLinkBuilder> resourceLinkBuilderClass;
     private Map<String, Class<?>> proxies = new ConcurrentHashMap<>();
@@ -52,7 +53,7 @@ public final class HateoasProviderHelper {
             proxyClass = tryToCreateProxyClass(resourceClass);
         }
         if (proxyClass == Object.class) {
-            throw new ClassCastException("Cannot find correct proxy to case " + resourceClass + " to.");
+            throw new ClassCastException("Cannot find correct proxy to cast " + resourceClass + " to.");
         }
         try {
             return (T) proxyClass

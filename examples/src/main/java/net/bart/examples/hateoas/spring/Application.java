@@ -6,10 +6,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.servlet.HandlerAdapter;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @EnableAutoConfiguration
 @Import({SpringHateoasConfiguration.class})
