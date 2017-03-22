@@ -18,7 +18,7 @@ public class HateoasContext implements HateoasAware {
         return content;
     }
 
-    public HateoasContext setSelf(final LinkProvider self) {
+    protected final HateoasContext setSelf(final LinkProvider self) {
         this.self = self;
         return this;
     }

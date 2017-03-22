@@ -20,16 +20,16 @@ public class RSController {
     @Path("test")
     @Produces(MediaType.APPLICATION_JSON)
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
-    public Response test(@Hateoas HateoasContext context) throws MalformedURLException {
+    public HateoasContext test(@Hateoas HateoasContext context) throws MalformedURLException {
         final RSResponse content = new RSResponse("Hello world");
-        final RSAuthor test = new RSAuthor("Test");
+        final RSAuthor test = new RSAuthor(1, "Test");
         content.getAuthors().add(test);
-        test.addSelfLink();
-        return Response.ok(context
+        test.addSelfLink(context);
+        return context
                 .content(content)
                 .addLink("search", "http://www.google.com")
                 .addLink("report", new URL("http://www.politie.nl"))
-                .addLink("test2", context.resource(RSController.class).test2(context))).build();
+                .addLink("test2", context.resource(RSController.class).test2(context));
     }
 
     @GET

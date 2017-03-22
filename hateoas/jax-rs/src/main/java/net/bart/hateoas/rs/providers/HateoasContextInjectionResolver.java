@@ -1,5 +1,6 @@
 package net.bart.hateoas.rs.providers;
 
+import net.bart.hateoas.core.HateoasAware;
 import net.bart.hateoas.core.HateoasContext;
 import net.bart.hateoas.core.annotations.Hateoas;
 import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
@@ -61,7 +62,18 @@ public class HateoasContextInjectionResolver extends ParamInjectionResolver<Hate
 
         @Override
         public HateoasContext provide() {
-            return new HateoasContext().setSelf(this);
+            final RSHateoasContext result = new RSHateoasContext(this);
+            getContainerRequest().getPropertiesDelegate().setProperty(HateoasAware.HATEOAS_CONTEXT_PROPERTY, result);
+            return result;
+        }
+    }
+
+    private static class RSHateoasContext extends HateoasContext {
+
+
+        public RSHateoasContext(final LinkProvider hateoasContextFactory) {
+            super();
+            setSelf(hateoasContextFactory);
         }
     }
 

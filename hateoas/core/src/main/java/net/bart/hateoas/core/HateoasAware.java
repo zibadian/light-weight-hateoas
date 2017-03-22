@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 public interface HateoasAware {
 
+    String HATEOAS_CONTEXT_PROPERTY = "__Hateoas";
+
     @JsonProperty
     @JsonUnwrapped
     @JsonInclude(value = JsonInclude.Include.NON_NULL)

@@ -24,7 +24,7 @@ public class HateoasProviderHelperTest {
     public static class TestLinkBuilder extends AbstractResourceLinkBuilder {
 
         @Override
-        protected UrlPart makeMethodPathPart(Method method) {
+        protected UrlPart makeMethodPathPart(Method method, final Object[] arguments) {
             return new UrlPathPart("testMethod");
         }
 

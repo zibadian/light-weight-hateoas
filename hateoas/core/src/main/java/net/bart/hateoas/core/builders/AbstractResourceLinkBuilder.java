@@ -17,7 +17,7 @@ public abstract class AbstractResourceLinkBuilder extends LinkBuilder {
         return HateoasProviderHelper.makeResourceWatcher(resourceClass, new InternalLinkBuilder());
     }
 
-    protected abstract UrlPart makeMethodPathPart(final Method method);
+    protected abstract UrlPart makeMethodPathPart(final Method method, final Object[] arguments);
 
     protected abstract UrlPart makeControllerPathPart(final Class<?> resourceClass);
 
@@ -27,7 +27,7 @@ public abstract class AbstractResourceLinkBuilder extends LinkBuilder {
         @Override
         public Object invoke(final Object proxy, final Method method, final Object[] arguments) throws Throwable {
             try {
-                addPart(makeMethodPathPart(method));
+                addPart(makeMethodPathPart(method, arguments));
             } catch (NullPointerException npe) {
                 log.warn(String.format("Failed to create method part for %s.%s()\n cause: Missing path describing annotation",
                         method.getDeclaringClass().getCanonicalName(), method.getName()));

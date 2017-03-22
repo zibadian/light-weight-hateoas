@@ -19,7 +19,7 @@ public class AbstractResourceLinkBuilderTest {
 
     private AbstractResourceLinkBuilder fixture = new AbstractResourceLinkBuilder() {
         @Override
-        protected UrlPart makeMethodPathPart(final Method method) {
+        protected UrlPart makeMethodPathPart(final Method method, final Object[] arguments) {
             return new UrlPathPart(methodpathPartMock.getHref());
         }
 
