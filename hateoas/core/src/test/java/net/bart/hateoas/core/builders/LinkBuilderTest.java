@@ -28,36 +28,25 @@ public class LinkBuilderTest {
         final QueryParamPart test = new QueryParamPart();
         test.add("test", "").setMustInclude(true);
 
-        final URI result = fixture
+        final String result = fixture
                 .addPart(test)
                 .addPart(new UrlPathPart("somewhere", true))
                 .addPart(new FragmentPart("frag"))
                 .addPart(new HostPart("localhost"))
                 .build();
 
-        assertEquals("http://localhost/somewhere?test=#frag", result.toString());
+        assertEquals("http://localhost/somewhere?test=#frag", result);
     }
 
     @Test
     public void add_multiple_hosts() {
 
-        final URI result = fixture
+        final String result = fixture
                 .addPart(new HostPart("localhost"))
                 .addPart(new HostPart("testhost"))
                 .build();
 
-        assertEquals("http://testhost", result.toString());
-    }
-
-    @Test(expected = HateoasException.class)
-    public void invalid_URI() {
-
-        final URI result = fixture
-                .addPart(new HostPart("localhost"))
-                .addPart(new UrlPathPart("AA####AA"))
-                .build();
-
-        assertEquals("http://testhost", result.toString());
+        assertEquals("http://testhost", result);
     }
 
     @Test

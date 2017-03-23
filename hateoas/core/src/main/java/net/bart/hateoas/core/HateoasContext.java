@@ -24,8 +24,8 @@ public class HateoasContext implements HateoasAware {
     }
 
     public HateoasContext addSelfLink() {
-        final LinkBuilder abstractLinkBuilder = self.provideSelfLink();
-        addLink("self", abstractLinkBuilder.build());
+        final LinkBuilder selfLinkBuilder = self.provideSelfLink();
+        addLink("self", selfLinkBuilder.build());
         return this;
     }
 

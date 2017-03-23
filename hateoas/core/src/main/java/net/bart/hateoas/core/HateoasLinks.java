@@ -33,7 +33,7 @@ public final class HateoasLinks {
 
     public final void addLink(final String ref, final Object link) {
         if (internalLink != null) {
-            final URI uri = internalLink.build();
+            final String uri = internalLink.build();
             internalLink = null;
             addLink(ref, uri);
         } else if (link == null) {
@@ -41,7 +41,7 @@ public final class HateoasLinks {
         } else if (link instanceof URI) {
             links.put(ref, (URI) link);
         } else if (link instanceof LinkBuilder) {
-            links.put(ref, ((LinkBuilder) link).build());
+            addLink(ref, ((LinkBuilder) link).build());
         } else {
             try {
                 links.put(ref, new URI(link.toString()));

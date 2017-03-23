@@ -119,13 +119,18 @@ public class HateoasLinksTest {
 
         iLinkField.set(fixture, new AbstractResourceLinkBuilder() {
             @Override
-            protected UrlPart makeMethodPathPart(final Method method, final Object[] arguments) {
+            protected UrlPart makeMethodPathPart(final Method method) {
                 return null;
             }
 
             @Override
             protected UrlPart makeControllerPathPart(final Class<?> resourceClass) {
                 return null;
+            }
+
+            @Override
+            protected String fillParameters(Method method, Object[] arguments, String URI) {
+                return URI;
             }
         });
         fixture.addLink("test", null);
@@ -145,13 +150,18 @@ public class HateoasLinksTest {
     public static class TestLinkBuilder extends AbstractResourceLinkBuilder {
 
         @Override
-        protected UrlPart makeMethodPathPart(Method method, final Object[] arguments) {
+        protected UrlPart makeMethodPathPart(Method method) {
             return new UrlPathPart("testMethod");
         }
 
         @Override
         protected UrlPart makeControllerPathPart(Class<?> resourceClass) {
             return new UrlPathPart("testResource");
+        }
+
+        @Override
+        protected String fillParameters(Method method, Object[] arguments, String URI) {
+            return URI;
         }
     }
 

@@ -14,18 +14,16 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ResourceLinkBuilder extends AbstractResourceLinkBuilder {
 
     @Override
-    protected UrlPart makeMethodPathPart(final Method method, final Object[] arguments) {
-        final List<Object> paramValues = mapURIVariableParameters(method.getParameters(), arguments);
+    protected UrlPart makeMethodPathPart(final Method method) {
+        //final List<Object> paramValues = mapURIVariableParameters(method.getParameters());
         String href = UriBuilder
                 .fromMethod(method.getDeclaringClass(), method.getName())
-                .build(paramValues.toArray(new Object[paramValues.size()]))
+                .build()
                 .toString();
         try {
             href = URLDecoder.decode(href, "UTF-8");
@@ -63,6 +61,11 @@ public class ResourceLinkBuilder extends AbstractResourceLinkBuilder {
     @Override
     protected UrlPart makeControllerPathPart(final Class<?> declaringClass) {
         return new UrlPathPart(UriBuilder.fromResource(declaringClass).build().toString());
+    }
+
+    @Override
+    protected String fillParameters(Method method, Object[] arguments, String URI) {
+        return URI;
     }
 
 }

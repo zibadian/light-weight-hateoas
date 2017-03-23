@@ -1,13 +1,6 @@
 package net.bart.hateoas.core.builders;
 
-import net.bart.hateoas.core.HateoasException;
-
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,19 +19,15 @@ public class LinkBuilder {
         }
     }
 
-    public URI build() {
+    public String build() {
         if (hasErrors) {
             return null;
         }
-        try {
-            return new URI(urlParts
-                    .stream()
-                    .sorted((e1, e2) -> Integer.compare(e1.getOrder(), e2.getOrder()))
-                    .map(UrlPart::getHref)
-                    .collect(Collectors.joining()));
-        } catch (URISyntaxException e) {
-            throw new HateoasException(e);
-        }
+        return urlParts
+                .stream()
+                .sorted((e1, e2) -> Integer.compare(e1.getOrder(), e2.getOrder()))
+                .map(UrlPart::getHref)
+                .collect(Collectors.joining());
     }
 
     public LinkBuilder addPart(final UrlPart part) {
@@ -55,7 +44,7 @@ public class LinkBuilder {
     }
 
     private void addUniquePart(final UrlPart part) {
-         urlParts.removeIf(i -> i.getClass().equals(part.getClass()));
+        urlParts.removeIf(i -> i.getClass().equals(part.getClass()));
         addNonUniquePart(part);
     }
 

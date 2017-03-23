@@ -17,11 +17,11 @@ import java.util.Map;
 public class SpringResourceLinkBuilder extends AbstractResourceLinkBuilder {
 
     @Override
-    protected UrlPart makeMethodPathPart(Method method, final Object[] arguments) {
+    protected UrlPart makeMethodPathPart(Method method) {
         RequestMapping annotation = AnnotatedElementUtils.findMergedAnnotation(method, RequestMapping.class);
         String href = annotation.value()[0];
-        final Map<String, Object> parameters = mapParametersToArguments(method.getParameters(), arguments);
-        href = processURITemplate(href, parameters);
+//        final Map<String, Object> parameters = mapParametersToArguments(method.getParameters(), arguments);
+  //      href = processURITemplate(href, parameters);
         return new UrlPathPart(href);
     }
 
@@ -66,6 +66,11 @@ public class SpringResourceLinkBuilder extends AbstractResourceLinkBuilder {
         } else {
             return new UrlPathPart(annotation.value()[0]);
         }
+    }
+
+    @Override
+    protected String fillParameters(Method method, Object[] arguments, String URI) {
+        return null;
     }
 
 }

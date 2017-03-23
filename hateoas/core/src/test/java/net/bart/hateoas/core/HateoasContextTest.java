@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -23,6 +24,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class HateoasContextTest {
 
+    @InjectMocks
     private HateoasContext fixture;
 
     @Mock
@@ -31,11 +33,6 @@ public class HateoasContextTest {
     @BeforeClass
     public static void setupClass() {
         new HateoasProviderHelper(HateoasLinksTest.TestLinkBuilder.class);
-    }
-
-    @Before
-    public void setup() {
-        fixture = new HateoasContext() {};
     }
 
     @Test
