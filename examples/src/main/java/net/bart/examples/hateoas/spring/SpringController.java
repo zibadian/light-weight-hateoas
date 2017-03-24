@@ -1,7 +1,6 @@
 package net.bart.examples.hateoas.spring;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import net.bart.hateoas.core.HateoasContext;
 import net.bart.hateoas.core.annotations.Hateoas;
 import org.springframework.http.MediaType;
@@ -14,23 +13,22 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 @RestController
-@RequestMapping("/testclass")
+@RequestMapping("/{name}")
 public class SpringController {
 
     @GetMapping(value = "/test", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public HateoasContext test(@Hateoas HateoasContext context) throws MalformedURLException {
         SpringResponse content = new SpringResponse("Hello world");
         return context
                 .content(content)
+                .addLink("test2", context.resource(SpringController.class).test2(context, "Thundersub"))
                 .addLink("search", "http://www.google.com")
-                .addLink("report", new URL("http://www.politie.nl"))
-                .addLink("test2", context.resource(SpringController.class).test2(context, "Thundersub"));
+                .addSelfLink()
+                .addLink("report", new URL("http://www.politie.nl"));
     }
 
     @GetMapping(value = "test2/{name}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public SpringResponse test2(@Hateoas HateoasContext context, @PathVariable("name") String name) {
+    public SpringResponse test2(@Hateoas HateoasContext context, @PathVariable(name="name") String name) {
         return new SpringResponse("Hello " + name);
     }
 

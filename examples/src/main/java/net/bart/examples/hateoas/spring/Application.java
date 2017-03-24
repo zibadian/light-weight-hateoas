@@ -1,10 +1,8 @@
 package net.bart.examples.hateoas.spring;
 
 import net.bart.hateoas.spring.configuration.SpringHateoasConfiguration;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
