@@ -3,11 +3,8 @@ package net.bart.hateoas.core;
 import net.bart.hateoas.core.builders.LinkBuilder;
 import net.bart.hateoas.core.builders.urls.UrlPathPart;
 import net.bart.hateoas.core.providers.HateoasProviderHelper;
-import net.bart.hateoas.core.providers.HateoasProviderHelperTest;
 import net.bart.hateoas.core.providers.LinkProvider;
-import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -35,7 +32,7 @@ public class HateoasContextTest {
 
     @BeforeClass
     public static void setupClass() {
-        new HateoasProviderHelper(HateoasLinksTest.TestLinkBuilder.class);
+        new HateoasProviderHelper(HateoasLinksTest.TestLinkProvider.class);
     }
 
     @Test

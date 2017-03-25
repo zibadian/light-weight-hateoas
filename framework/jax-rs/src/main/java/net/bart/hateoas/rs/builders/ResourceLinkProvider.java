@@ -1,6 +1,6 @@
 package net.bart.hateoas.rs.builders;
 
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.builders.UrlPart;
 import net.bart.hateoas.core.builders.urls.UrlPathPart;
 
@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.net.URLDecoder;
 
-public class ResourceLinkBuilder extends AbstractResourceLinkBuilder {
+public class ResourceLinkProvider extends AbstractResourceLinkProvider {
 
     @Override
     protected UrlPart makeMethodPathPart(final Method method) {

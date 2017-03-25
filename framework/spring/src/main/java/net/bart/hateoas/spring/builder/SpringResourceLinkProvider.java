@@ -1,7 +1,6 @@
 package net.bart.hateoas.spring.builder;
 
-import net.bart.hateoas.core.HateoasException;
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.builders.UrlPart;
 import net.bart.hateoas.core.builders.urls.UrlPathPart;
 import org.springframework.core.annotation.AnnotatedElementUtils;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
-public class SpringResourceLinkBuilder extends AbstractResourceLinkBuilder {
+public class SpringResourceLinkProvider extends AbstractResourceLinkProvider {
 
     @Override
     protected UrlPart makeMethodPathPart(Method method) {

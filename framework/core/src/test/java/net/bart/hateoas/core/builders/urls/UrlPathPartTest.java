@@ -50,12 +50,4 @@ public class UrlPathPartTest {
         assertEquals("/test", fixture.getHref());
     }
 
-    @Test
-    public void uniqueness() {
-
-        fixture = new UrlPathPart("test", true);
-
-        assertFalse(fixture.isUnique());
-    }
-
 }

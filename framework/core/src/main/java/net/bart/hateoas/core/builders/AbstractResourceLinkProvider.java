@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
-public abstract class AbstractResourceLinkBuilder extends LinkBuilder {
+public abstract class AbstractResourceLinkProvider extends LinkBuilder {
 
     private static Logger log = LoggerFactory.getLogger(HateoasContext.class);
     private Method method;

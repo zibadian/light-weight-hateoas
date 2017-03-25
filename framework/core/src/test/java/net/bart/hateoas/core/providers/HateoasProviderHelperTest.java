@@ -1,7 +1,7 @@
 package net.bart.hateoas.core.providers;
 
 import net.bart.hateoas.core.HateoasContext;
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.builders.UrlPart;
 import net.bart.hateoas.core.builders.urls.UrlPathPart;
 import org.junit.BeforeClass;
@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
@@ -20,10 +19,10 @@ public class HateoasProviderHelperTest {
 
     @BeforeClass
     public static void setupClass() {
-        new HateoasProviderHelper(TestLinkBuilder.class);
+        new HateoasProviderHelper(TestLinkProvider.class);
     }
 
-    public static class TestLinkBuilder extends AbstractResourceLinkBuilder {
+    public static class TestLinkProvider extends AbstractResourceLinkProvider {
 
         @Override
         protected UrlPart makeMethodPathPart(Method method) {

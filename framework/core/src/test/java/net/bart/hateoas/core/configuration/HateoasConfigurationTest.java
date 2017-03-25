@@ -1,6 +1,6 @@
 package net.bart.hateoas.core.configuration;
 
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.builders.UrlPart;
 import net.bart.hateoas.core.builders.urls.UrlPathPart;
 import net.bart.hateoas.core.providers.HateoasProviderHelper;
@@ -17,7 +17,7 @@ public class HateoasConfigurationTest {
     public void setup() {
         fixture = new HateoasConfiguration() {
             @Override
-            protected Class<? extends AbstractResourceLinkBuilder> getResourceLinkBuilderClass() {
+            protected Class<? extends AbstractResourceLinkProvider> getResourceLinkBuilderClass() {
                 return null;
             }
         };

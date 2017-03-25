@@ -1,6 +1,6 @@
 package net.bart.hateoas.core.providers;
 
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.proxy.FactoryException;
 import net.bart.hateoas.core.proxy.Invoker;
 import net.bart.hateoas.core.proxy.ProxyGenerator;
@@ -14,12 +14,12 @@ public final class HateoasProviderHelper {
     public static final String BASE_URI_KEY = "base_uri";
 
     private static HateoasProviderHelper INSTANCE;
-    private final Class<? extends AbstractResourceLinkBuilder> resourceLinkBuilderClass;
+    private final Class<? extends AbstractResourceLinkProvider> resourceLinkBuilderClass;
     private Map<String, Class<?>> proxies = new ConcurrentHashMap<>();
     private ProxyGenerator proxyGenerator;
     private Map<String, Object> linkProperties = new HashMap<>();
 
-    public HateoasProviderHelper(final Class<? extends AbstractResourceLinkBuilder> resourceLinkBuilderClass) {
+    public HateoasProviderHelper(final Class<? extends AbstractResourceLinkProvider> resourceLinkBuilderClass) {
         if (INSTANCE == null) {
             INSTANCE = this;
         }
@@ -38,7 +38,7 @@ public final class HateoasProviderHelper {
         return INSTANCE.linkProperties.put(name, value);
     }
 
-    public static AbstractResourceLinkBuilder getResourceLinkBuilder() {
+    public static AbstractResourceLinkProvider getResourceLinkBuilder() {
         try {
             return INSTANCE.resourceLinkBuilderClass.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {

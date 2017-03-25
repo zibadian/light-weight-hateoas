@@ -1,17 +1,13 @@
 package net.bart.hateoas.core;
 
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.builders.LinkBuilder;
 import net.bart.hateoas.core.builders.UrlPart;
 import net.bart.hateoas.core.builders.urls.UrlPathPart;
 import net.bart.hateoas.core.providers.HateoasProviderHelper;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -25,14 +21,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
 
 public class HateoasLinksTest {
 
     private HateoasLinks fixture;
     private Map<String, URI> links;
 
-    private AbstractResourceLinkBuilder internalLinkMock = new AbstractResourceLinkBuilder() {
+    private AbstractResourceLinkProvider internalLinkMock = new AbstractResourceLinkProvider() {
 
         @Override
         protected UrlPart makeMethodPathPart(final Method method) {
@@ -52,7 +47,7 @@ public class HateoasLinksTest {
 
     @BeforeClass
     public static void setupClass() {
-        new HateoasProviderHelper(TestLinkBuilder.class);
+        new HateoasProviderHelper(TestLinkProvider.class);
     }
 
     @Before
@@ -140,10 +135,10 @@ public class HateoasLinksTest {
         final Field iLinkField = HateoasLinks.class.getDeclaredField("internalLink");
         iLinkField.setAccessible(true);
         iLinkField.set(fixture, internalLinkMock);
-        final Field methodField = AbstractResourceLinkBuilder.class.getDeclaredField("method");
+        final Field methodField = AbstractResourceLinkProvider.class.getDeclaredField("method");
         methodField.setAccessible(true);
-        methodField.set(internalLinkMock, AbstractResourceLinkBuilder.class.getDeclaredMethod("build"));
-        final Field argumentsField = AbstractResourceLinkBuilder.class.getDeclaredField("arguments");
+        methodField.set(internalLinkMock, AbstractResourceLinkProvider.class.getDeclaredMethod("build"));
+        final Field argumentsField = AbstractResourceLinkProvider.class.getDeclaredField("arguments");
         argumentsField.setAccessible(true);
         argumentsField.set(internalLinkMock, new Object[0]);
 
@@ -152,7 +147,7 @@ public class HateoasLinksTest {
         assertTrue(links.containsKey("test"));
     }
 
-    public static class TestLinkBuilder extends AbstractResourceLinkBuilder {
+    public static class TestLinkProvider extends AbstractResourceLinkProvider {
 
         @Override
         protected UrlPart makeMethodPathPart(Method method) {

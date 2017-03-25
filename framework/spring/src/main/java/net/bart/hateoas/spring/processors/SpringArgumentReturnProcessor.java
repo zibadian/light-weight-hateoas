@@ -2,7 +2,6 @@ package net.bart.hateoas.spring.processors;
 
 import net.bart.hateoas.core.HateoasContext;
 import net.bart.hateoas.core.annotations.Hateoas;
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
 import net.bart.hateoas.core.builders.LinkBuilder;
 import net.bart.hateoas.core.builders.urls.UrlPathPart;
 import net.bart.hateoas.core.providers.LinkProvider;

@@ -23,9 +23,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AbstractResourceLinkBuilderTest {
+public class AbstractResourceLinkProviderTest {
 
-    private AbstractResourceLinkBuilder fixture = new AbstractResourceLinkBuilder() {
+    private AbstractResourceLinkProvider fixture = new AbstractResourceLinkProvider() {
 
         @Override
         protected UrlPart makeMethodPathPart(final Method method) {
@@ -100,7 +100,7 @@ public class AbstractResourceLinkBuilderTest {
 
         fixture.getResource(TestResourceClass.class).test("", null);
 
-        final Field argsField = AbstractResourceLinkBuilder.class.getDeclaredField("arguments");
+        final Field argsField = AbstractResourceLinkProvider.class.getDeclaredField("arguments");
         argsField.setAccessible(true);
         argsField.set(fixture, new Object[0]);
 

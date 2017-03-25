@@ -1,8 +1,8 @@
 package net.bart.hateoas.spring.configuration;
 
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.configuration.HateoasConfiguration;
-import net.bart.hateoas.spring.builder.SpringResourceLinkBuilder;
+import net.bart.hateoas.spring.builder.SpringResourceLinkProvider;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Import;
 public class SpringHateoasConfiguration extends HateoasConfiguration {
 
     @Override
-    protected Class<? extends AbstractResourceLinkBuilder> getResourceLinkBuilderClass() {
-        return SpringResourceLinkBuilder.class;
+    protected Class<? extends AbstractResourceLinkProvider> getResourceLinkBuilderClass() {
+        return SpringResourceLinkProvider.class;
     }
 
 }

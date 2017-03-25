@@ -1,8 +1,8 @@
 package net.bart.hateoas.rs.configuration;
 
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.configuration.HateoasConfiguration;
-import net.bart.hateoas.rs.builders.ResourceLinkBuilder;
+import net.bart.hateoas.rs.builders.ResourceLinkProvider;
 import net.bart.hateoas.rs.providers.HateoasContextInjectionResolver;
 
 import javax.ws.rs.core.Feature;
@@ -17,8 +17,8 @@ public class RSHateoasConfiguration extends HateoasConfiguration implements Feat
     }
 
     @Override
-    protected Class<? extends AbstractResourceLinkBuilder> getResourceLinkBuilderClass() {
-        return ResourceLinkBuilder.class;
+    protected Class<? extends AbstractResourceLinkProvider> getResourceLinkBuilderClass() {
+        return ResourceLinkProvider.class;
     }
 
 }

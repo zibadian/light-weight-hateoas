@@ -25,27 +25,13 @@ public class LinkBuilder {
         }
         return urlParts
                 .stream()
-                .sorted((e1, e2) -> Integer.compare(e1.getOrder(), e2.getOrder()))
                 .map(UrlPart::getHref)
                 .collect(Collectors.joining());
     }
 
     public final LinkBuilder addPart(final UrlPart part) {
-        if (part.isUnique()) {
-            addUniquePart(part);
-        } else {
-            addNonUniquePart(part);
-        }
-        return this;
-    }
-
-    private void addNonUniquePart(final UrlPart part) {
         urlParts.add(part);
-    }
-
-    private void addUniquePart(final UrlPart part) {
-        urlParts.removeIf(i -> i.getClass().equals(part.getClass()));
-        addNonUniquePart(part);
+        return this;
     }
 
 }

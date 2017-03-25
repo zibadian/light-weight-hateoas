@@ -2,29 +2,28 @@ package net.bart.hateoas.core;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.builders.LinkBuilder;
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
 import net.bart.hateoas.core.providers.HateoasProviderHelper;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public final class HateoasLinks {
 
     private final Map<String, URI> links = new HashMap<>();
-    private volatile AbstractResourceLinkBuilder internalLink;
+    private volatile AbstractResourceLinkProvider internalLink;
 
     @JsonProperty
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     public final Map<String, String> getLinks() {
-        final Map<String, String> result = new HashMap<>();
-        for (Map.Entry<String, URI> linkEntry : links.entrySet()) {
-            if (linkEntry.getValue() != null) {
-                result.put(linkEntry.getKey(), linkEntry.getValue().toString());
-            }
-        }
+        final Map<String, String> result = links.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() != null)
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().toString()));
         if (result.isEmpty()) {
             return null;
         }

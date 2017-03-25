@@ -13,6 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <version.ow2.asm>5.2</version.ow2.asm>
         <version.fasterxml.jackson>2.8.6</version.fasterxml.jackson>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>

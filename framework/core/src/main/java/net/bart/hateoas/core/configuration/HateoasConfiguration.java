@@ -1,10 +1,8 @@
 package net.bart.hateoas.core.configuration;
 
-import net.bart.hateoas.core.builders.AbstractResourceLinkBuilder;
+import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.builders.UrlPart;
 import net.bart.hateoas.core.providers.HateoasProviderHelper;
-
-import java.net.URI;
 
 public abstract class HateoasConfiguration {
 
@@ -12,7 +10,7 @@ public abstract class HateoasConfiguration {
         new HateoasProviderHelper(getResourceLinkBuilderClass());
     }
 
-    protected abstract Class<? extends AbstractResourceLinkBuilder> getResourceLinkBuilderClass();
+    protected abstract Class<? extends AbstractResourceLinkProvider> getResourceLinkBuilderClass();
 
 
     public HateoasConfiguration setBaseUri(final UrlPart baseUri) {
