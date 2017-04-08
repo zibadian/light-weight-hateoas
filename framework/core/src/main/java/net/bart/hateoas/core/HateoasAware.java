@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import net.bart.hateoas.core.annotations.Hateoas;
 
 public interface HateoasAware {
 
@@ -17,6 +18,11 @@ public interface HateoasAware {
     @JsonIgnore
     default HateoasAware addLink(final String ref, final Object link) {
         getLinks().addLink(ref, link);
+        return this;
+    }
+
+    @JsonIgnore
+    default Object createSelfLink() {
         return this;
     }
 

@@ -23,7 +23,7 @@ public class SpringController {
                 .content(content)
                 .addLink("test2", context.resource(SpringController.class).test2(context, "Thundersub"))
                 .addLink("search", "http://www.google.com")
-                .addSelfLink()
+                .addSelfLinks()
                 .addLink("report", new URL("http://www.politie.nl"));
     }
 

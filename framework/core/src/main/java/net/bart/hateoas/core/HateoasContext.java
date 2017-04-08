@@ -1,6 +1,5 @@
 package net.bart.hateoas.core;
 
-import net.bart.hateoas.core.builders.LinkBuilder;
 import net.bart.hateoas.core.providers.LinkProvider;
 
 public class HateoasContext implements HateoasAware {
@@ -22,10 +21,9 @@ public class HateoasContext implements HateoasAware {
         return content;
     }
 
-    public HateoasContext addSelfLink() {
-        final LinkBuilder selfLinkBuilder = self.provideSelfLink();
-        addLink("self", selfLinkBuilder.build());
-        return this;
+    @Override
+    public final Object createSelfLink() {
+        return self.provideSelfLink().build();
     }
 
     @Override
@@ -41,6 +39,11 @@ public class HateoasContext implements HateoasAware {
     @Override
     public HateoasLinks getLinks() {
         return links;
+    }
+
+    public HateoasContext addSelfLinks() {
+        links.addLink("self", createSelfLink());
+        return this;
     }
 
 }

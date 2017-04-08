@@ -4,6 +4,7 @@ import net.bart.hateoas.core.builders.AbstractResourceLinkProvider;
 import net.bart.hateoas.core.configuration.HateoasConfiguration;
 import net.bart.hateoas.rs.builders.ResourceLinkProvider;
 import net.bart.hateoas.rs.providers.HateoasContextInjectionResolver;
+import net.bart.hateoas.rs.providers.HateoasMessageBodyWriter;
 
 import javax.ws.rs.core.Feature;
 import javax.ws.rs.core.FeatureContext;
@@ -12,6 +13,8 @@ public class RSHateoasConfiguration extends HateoasConfiguration implements Feat
 
     @Override
     public boolean configure(final FeatureContext context) {
+        context.register(HateoasMessageBodyWriter.class);
+        context.register(new HateoasMessageBodyWriter.Binder());
         context.register(new HateoasContextInjectionResolver.Binder());
         return true;
     }

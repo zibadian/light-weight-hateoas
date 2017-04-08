@@ -55,7 +55,7 @@ public class HateoasContextTest {
         when(linkProviderMock.provideSelfLink()).thenReturn(new LinkBuilder()
                 .addPart(new UrlPathPart("test")));
 
-        fixture.addSelfLink();
+        fixture.createSelfLink();
 
         assertEquals(linkProviderMock, selfField.get(fixture));
         verify(linkProviderMock).provideSelfLink();

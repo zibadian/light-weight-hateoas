@@ -29,9 +29,9 @@ public class RSAuthor implements HateoasAware {
         return links;
     }
 
-    public RSAuthor addSelfLink(@Hateoas HateoasContext context) {
-        addLink("Self", getLinks().resource(RSAuthorController.class).author(id, null, null));
-        return this;
+    @Override
+    public Object createSelfLink() {
+        return getLinks().resource(RSAuthorController.class).author(id, null, null);
     }
 
 }

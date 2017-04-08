@@ -22,9 +22,7 @@ public class RSController {
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
     public HateoasContext test(@Hateoas HateoasContext context) throws MalformedURLException {
         final RSResponse content = new RSResponse("Hello world");
-        final RSAuthor test = new RSAuthor(1, "Test");
-        content.getAuthors().add(test);
-        test.addSelfLink(context);
+        content.getAuthors().add(new RSAuthor(1, "Test"));
         return context
                 .content(content)
                 .addLink("search", "http://www.google.com")
